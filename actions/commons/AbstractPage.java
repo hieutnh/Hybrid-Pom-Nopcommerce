@@ -14,17 +14,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import pageOjects.ordersPageObject;
-import pageOjects.rewardPointsPageObject;
-import pageOjects.stockSubscriptionsObject;
 import pageOjects.PageGeneratorManager;
 import pageOjects.addressesPageObject;
 import pageOjects.customerInfoPageObject;
 import pageOjects.myProductReviewsPageObject;
+import pageOjects.ordersPageObject;
+import pageOjects.rewardPointsPageObject;
+import pageOjects.stockSubscriptionsObject;
 import pageUIs.AbstractPageUI;
 
 public class AbstractPage {
-
+	
+	//**Hàm cho selenium WebBrowser
 	public void openPageUrl(WebDriver driver, String url) {
 		driver.get(url);
 
@@ -71,7 +72,7 @@ public class AbstractPage {
 	}
 
 	public void waitAlertPresence(WebDriver driver) {
-		explicitWait = new WebDriverWait(driver, 30);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.alertIsPresent());
 	}
 
@@ -107,6 +108,7 @@ public class AbstractPage {
 		driver.switchTo().window(parentID);
 	}
 
+	//**hàm cho selenium WebElement
 	public WebElement getElement(WebDriver driver, String locator) {
 		return driver.findElement(getByXpath(locator));
 	}
@@ -119,17 +121,42 @@ public class AbstractPage {
 		return By.xpath(locator);
 	}
 
-	public void clickToElement(WebDriver driver, String loacator) {
+	public String getDynamicLocator(String locator, String... values) {
+		locator = String.format(locator, (Object[]) values);
+		return locator;
+	}
+
+	public void clickToElement(WebDriver driver, String locator) {
 		if (driver.toString().toLowerCase().contains("edge")) {
 			sleepInMiliSecond(500);
 		}
-		element = getElement(driver, loacator);
+		element = getElement(driver, locator);
 		element.click();
 	}
 
-	public void sendkeyToElement(WebDriver driver, String loacator, String value) {
-		element = getElement(driver, loacator);
+	public void clickToElement(WebDriver driver, String locator, String... values) {
+		if (driver.toString().toLowerCase().contains("edge")) {
+			sleepInMiliSecond(500);
+		}
+		element = getElement(driver, getDynamicLocator(locator, values));
+		element.click();
+	}
+
+	public void sendkeyToElement(WebDriver driver, String locator, String value) {
+		element = getElement(driver, locator);
 		element.clear();
+		if (driver.toString().toLowerCase().contains("chrome") || driver.toString().toLowerCase().contains("edge")) {
+			sleepInMiliSecond(500);
+		}
+		element.sendKeys(value);
+	}
+
+	public void sendkeyToElement(WebDriver driver, String locator, String value, String... values) {
+		element = getElement(driver, getDynamicLocator(locator, values));
+		element.clear();
+		if (driver.toString().toLowerCase().contains("chrome") || driver.toString().toLowerCase().contains("edge")) {
+			sleepInMiliSecond(500);
+		}
 		element.sendKeys(value);
 	}
 
@@ -221,6 +248,11 @@ public class AbstractPage {
 
 	public boolean isElementDisplayed(WebDriver driver, String locator) {
 		element = getElement(driver, locator);
+		return element.isDisplayed();
+	}
+
+	public boolean isElementDisplayed(WebDriver driver, String locator, String... values) {
+		element = getElement(driver, getDynamicLocator(locator, values));
 		return element.isDisplayed();
 	}
 
@@ -350,7 +382,7 @@ public class AbstractPage {
 	}
 
 	public boolean waitToJQueryAndJSLoadedSuccess(WebDriver driver) {
-		explicitWait = new WebDriverWait(driver, 30);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		jsExecutor = (JavascriptExecutor) driver;
 
 		ExpectedCondition<Boolean> jQueryLoad = new ExpectedCondition<Boolean>() {
@@ -375,25 +407,41 @@ public class AbstractPage {
 	}
 
 	public void waitToElementPresence(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, 30);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.presenceOfElementLocated(getByXpath(locator)));
 	}
 
 	public void waitToElementVisible(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, 30);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByXpath(locator)));
 	}
 
+	public void waitToElementVisible(WebDriver driver, String locator, String... values) {
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(getByXpath(getDynamicLocator(locator, values))));
+	}
+
 	public void waitToElementInvisible(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, 30);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(locator)));
 	}
 
+	public void waitToElementInvisible(WebDriver driver, String locator, String... values) {
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
+		explicitWait.until(ExpectedConditions.invisibilityOfElementLocated(getByXpath(getDynamicLocator(locator, values))));
+	}
+
 	public void waitToElementClickAble(WebDriver driver, String locator) {
-		explicitWait = new WebDriverWait(driver, 30);
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(locator)));
 	}
 
+	public void waitToElementClickAble(WebDriver driver, String locator, String... values) {
+		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
+		explicitWait.until(ExpectedConditions.elementToBeClickable(getByXpath(getDynamicLocator(locator, values))));
+	}
+
+	// Các hàm mở page của my account
 	public ordersPageObject clickToOrderLink(WebDriver driver) {
 		waitToElementClickAble(driver, AbstractPageUI.ORDER_LINK);
 		clickToElement(driver, AbstractPageUI.ORDER_LINK);
@@ -429,8 +477,33 @@ public class AbstractPage {
 		clickToElement(driver, AbstractPageUI.STOCK_SUBCRIPTIONS);
 		return PageGeneratorManager.getStockSubscriptionsPage(driver);
 	}
-	
 
+	// Rest Parameter hàm dùng 1 locator để mở các link chỉ nên dùng < 15 page (cách 1)
+	public AbstractPage clickToAllLinkMyAccount1(WebDriver driver, String linkName) {
+		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
+		switch (linkName) {
+		case "Addresses":
+			return PageGeneratorManager.getAddresesPage(driver);
+		case "Customer info":
+			return PageGeneratorManager.getCustomerInfoPage(driver);
+		case "Orders":
+			return PageGeneratorManager.getOrderPage(driver);
+		case "My product reviews":
+			return PageGeneratorManager.getMyProductReviewsPage(driver);
+		case "Reward points":
+			return PageGeneratorManager.getRewardPointsPage(driver);
+		default:
+			return PageGeneratorManager.getStockSubscriptionsPage(driver);
+
+		}
+	}
+	
+	// Rest Parameter hàm dùng 1 locator để mở các link ko giới hạn bao nhiêu page (cách 2)
+	public void clickToAllLinkMyAccount2(WebDriver driver, String linkName) {
+		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
+	}
 
 	private WebDriverWait explicitWait;
 	private JavascriptExecutor jsExecutor;

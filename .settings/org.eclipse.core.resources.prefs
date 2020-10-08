@@ -1,9 +1,12 @@
 eclipse.preferences.version=1
+encoding//actions/commons/AbstractPage.java=UTF-8
 encoding//actions/commons/AbstractTest.java=UTF-8
 encoding//actions/pageOjects/homePageObject.java=UTF-8
+encoding//interfaces/pageUIs/AbstractPageUI.java=UTF-8
 encoding//testcases/com/nopcommerce/users/Level_01_Register_Login_Step_By_Step.java=UTF-8
 encoding//testcases/com/nopcommerce/users/Level_02_Register_Login_comment_function.java=UTF-8
 encoding//testcases/com/nopcommerce/users/Level_03_Register_Login_Page_Object.java=UTF-8
 encoding//testcases/com/nopcommerce/users/Level_04_Register_Login_Multiple_Browser.java=UTF-8
 encoding//testcases/com/nopcommerce/users/Level_05_Register_Login_Generator_Page.java=UTF-8
 encoding//testcases/com/nopcommerce/users/Level_06_Register_Login_Page_Switch_Page.java=UTF-8
+encoding//testcases/com/nopcommerce/users/Level_07_Register_Login_Page_Rest_Parameter.java=UTF-8

@@ -25,6 +25,7 @@ public class Level_06_Register_Login_Page_Switch_Page extends AbstractTest {
 	Select select;
 	String email, pass, firstname, lastname;
 
+	//run all browsers
 	@Parameters("Browser")
 	@BeforeClass
 	public void beforeClass(String BrowserName) {

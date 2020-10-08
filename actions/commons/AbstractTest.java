@@ -48,12 +48,15 @@ public class AbstractTest {
 		} else {
 			throw new RuntimeException("Please input valid browser name");
 		}
+
 		driver.get("https://demo.nopcommerce.com/register");
+
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
 		return driver;
 
 	}
+	
 
 	protected int getRanDom() {
 		Random rand = new Random();

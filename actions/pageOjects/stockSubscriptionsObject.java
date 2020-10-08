@@ -2,7 +2,9 @@ package pageOjects;
 
 import org.openqa.selenium.WebDriver;
 
-public class stockSubscriptionsObject {
+import commons.AbstractPage;
+
+public class stockSubscriptionsObject extends AbstractPage {
 	WebDriver driver;
 
 	public stockSubscriptionsObject(WebDriver driver) {
