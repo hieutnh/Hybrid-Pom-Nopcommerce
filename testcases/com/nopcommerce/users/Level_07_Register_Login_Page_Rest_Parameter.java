@@ -9,13 +9,13 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import commons.AbstractTest;
-import pageOjects.ordersPageObject;
 import pageOjects.PageGeneratorManager;
 import pageOjects.addressesPageObject;
 import pageOjects.customerInfoPageObject;
 import pageOjects.homePageObject;
 import pageOjects.loginPageObject;
 import pageOjects.myProductReviewsPageObject;
+import pageOjects.ordersPageObject;
 import pageOjects.registerPageObject;
 import pageOjects.rewardPointsPageObject;
 import pageOjects.stockSubscriptionsObject;
@@ -63,13 +63,12 @@ public class Level_07_Register_Login_Page_Rest_Parameter extends AbstractTest {
 		registerPage.inputConfirmPassToTextBox(pass);
 		registerPage.clickRegisterButton();
 		Assert.assertEquals(registerPage.getRegisterSuccessMessage(), "Your registration completed");
-		registerPage.clickToLogOutButton();
+		homePage = registerPage.clickToLogOutButton();
 
 	}
 
 	@Test
 	public void TC_02_Log_In() {
-		homePage = PageGeneratorManager.getHomePage(driver);
 		loginPage = homePage.clickToLoginButton();
 		loginPage.inputToEmailTextBox(email);
 		loginPage.inputToPasswordTextBox(pass);

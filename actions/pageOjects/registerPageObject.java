@@ -73,9 +73,10 @@ public class registerPageObject extends AbstractPage {
 		return getElementText(driver, RegisterPageUI.REGISTER_SUCCESS_TEXT);
 	}
 
-	public void clickToLogOutButton() {
+	public homePageObject clickToLogOutButton() {
 		waitToElementClickAble(driver, RegisterPageUI.LOGOUT_BUTTON);
 		clickToElement(driver, RegisterPageUI.LOGOUT_BUTTON);
+		return PageGeneratorManager.getHomePage(driver);
 	}
 
 	public void inputToFirstName(String firstname) {
