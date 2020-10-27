@@ -20,5 +20,13 @@
 	<classpathentry kind="lib" path="WebDriverManager/jsoup-1.13.1.jar"/>
 	<classpathentry kind="lib" path="WebDriverManager/slf4j-api-1.7.30.jar"/>
 	<classpathentry kind="lib" path="WebDriverManager/webdrivermanager-4.2.0.jar"/>
+	<classpathentry kind="lib" path="libExtentVersion2/bson-3.0.4.jar"/>
+	<classpathentry kind="lib" path="libExtentVersion2/extentreports-2.41.2.jar"/>
+	<classpathentry kind="lib" path="libExtentVersion2/freemarker-2.3.23.jar"/>
+	<classpathentry kind="lib" path="libExtentVersion2/mongodb-driver-3.0.4.jar"/>
+	<classpathentry kind="lib" path="libExtentVersion2/mongodb-driver-core-3.0.4.jar"/>
+	<classpathentry kind="lib" path="libExtentVersion2/sqlite-jdbc-3.8.11.1.jar"/>
+	<classpathentry kind="lib" path="libLog/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libLog/log4j-1.2.16.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

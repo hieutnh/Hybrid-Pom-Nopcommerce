@@ -26,10 +26,10 @@ public class Level_06_Register_Login_Page_Switch_Page extends AbstractTest {
 	String email, pass, firstname, lastname;
 
 	//run all browsers
-	@Parameters("Browser")
+	@Parameters ({"Browser", "url"})
 	@BeforeClass
-	public void beforeClass(String BrowserName) {
-		driver = getBrowserDriver(BrowserName);
+	public void beforeClass(String BrowserName, String appUrl) {
+		driver = getBrowserDriver(BrowserName, appUrl);
 
 		firstname = "test";
 		lastname = "thoima";
@@ -70,7 +70,7 @@ public class Level_06_Register_Login_Page_Switch_Page extends AbstractTest {
 	@Test
 	public void TC_02_Log_In() {
 		homePage = PageGeneratorManager.getHomePage(driver);
-		loginPage = homePage.clickToLoginButton();
+		loginPage = homePage.clickToLoginLinkHeader();
 		loginPage.inputToEmailTextBox(email);
 		loginPage.inputToPasswordTextBox(pass);
 		homePage = loginPage.clicktoLoginButton();

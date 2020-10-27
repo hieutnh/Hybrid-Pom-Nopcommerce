@@ -96,4 +96,12 @@ public class registerPageObject extends AbstractPage {
 		selectItemInDropdown(driver, RegisterPageUI.MONTH_DROPDOWN, year);
 	}
 
+	
+
+	public String errorMessageLeast6() {
+		waitToElementVisible(driver, RegisterPageUI.ERROR_MESSAGE_PASS_LEAST_6);
+		return getElementText(driver, RegisterPageUI.ERROR_MESSAGE_PASS_LEAST_6);
+	}
+
+
 }

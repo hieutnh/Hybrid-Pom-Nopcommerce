@@ -14,6 +14,11 @@ public class RegisterPageUI {
 	public static final String REGISTER_SUCCESS_TEXT = "//div[@class='result']";
 	public static final String LOGOUT_BUTTON = "//a[contains(text(),'Log out')]";
 	
+	public static final String ERROR_MESSAGE_EMAIL_ALREADY_TEXT = "//div[contains(@class,'message-error')]//li";
+	public static final String ERROR_MESSAGE_PASS_LEAST_6 = "//p[contains(text(),'Password')]//ancestor::span[@class='field-validation-error']";
+	
+	
+	
 	
 
 }

@@ -1,5 +1,9 @@
 package com.nopcommerce.users;
 
+
+
+import java.sql.DriverManager;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
@@ -26,11 +30,11 @@ public class Level_07_Register_Login_Page_Rest_Parameter extends AbstractTest {
 	String email, pass, firstname, lastname;
 
 	//run all browsers
-	@Parameters("Browser")
+	@Parameters({ "Browser", "url" })
 	@BeforeClass
-	public void beforeClass(String BrowserName) {
-		driver = getBrowserDriver(BrowserName);
-
+	public void beforeClass(String BrowserName, String appUrl) {
+		driver = getBrowserDriver(BrowserName, appUrl);
+		
 		firstname = "test";
 		lastname = "thoima";
 		email = "testthoima" + getRanDom() + "@gmail.com";
@@ -40,8 +44,8 @@ public class Level_07_Register_Login_Page_Rest_Parameter extends AbstractTest {
 
 	@Test
 	public void TC_01_Register() {
-		homePage = PageGeneratorManager.getHomePage(driver);
-		registerPage = homePage.clickToRegisterLink();
+		
+		
 
 		registerPage.clickToGenderRadioButton();
 
@@ -67,80 +71,7 @@ public class Level_07_Register_Login_Page_Rest_Parameter extends AbstractTest {
 
 	}
 
-	@Test
-	public void TC_02_Log_In() {
-		loginPage = homePage.clickToLoginButton();
-		loginPage.inputToEmailTextBox(email);
-		loginPage.inputToPasswordTextBox(pass);
-		homePage = loginPage.clicktoLoginButton();
-
-		Assert.assertTrue(homePage.isDisplayMyAccountLink());
-		customerInfoPage = homePage.clickToMyAccountLink();
-	}
-
-	@Test
-	public void TC_03_My_Account() {
-		Assert.assertTrue(customerInfoPage.isSeclectedGenderMaleRadio());
-		Assert.assertEquals(customerInfoPage.getFirstNameInTexBox(), firstname);
-		Assert.assertEquals(customerInfoPage.getLastNameInTexBox(), lastname);
-		Assert.assertEquals(customerInfoPage.getTextInDaytTextBox(), "1");
-		Assert.assertEquals(customerInfoPage.getTextInMonthtTextBox(), "May");
-		Assert.assertEquals(customerInfoPage.getTextInYearTextBox(), "1980");
-	}
-
-	@Test
-	public void TC_04_Switch_Page() {
-		addressPage = customerInfoPage.clickToAddressLink(driver);
-		ordersPage = addressPage.clickToOrderLink(driver);
-		myProductPage = ordersPage.clickToMyProductPageLink(driver);
-		customerInfoPage = myProductPage.clickToCustomerInfoPage(driver);
-		rewardPointsPage = customerInfoPage.clickToRewardPoints(driver);
-		stockSubscriptionsPage = rewardPointsPage.clickToStockSubcriptions(driver);
-		customerInfoPage = rewardPointsPage.clickToCustomerInfoPage(driver);
-
-		
-	}
 	
-	@Test
-	public void TC_04_Rest_Parameter_Solution_1() {
-		addressPage = (addressesPageObject) customerInfoPage.clickToAllLinkMyAccount1(driver, "Addresses");
-		ordersPage = (ordersPageObject) addressPage.clickToAllLinkMyAccount1(driver, "Orders");
-		myProductPage = (myProductReviewsPageObject) ordersPage.clickToAllLinkMyAccount1(driver, "My product reviews");
-		customerInfoPage = (customerInfoPageObject) myProductPage.clickToAllLinkMyAccount1(driver, "Customer info");
-		rewardPointsPage = (rewardPointsPageObject) customerInfoPage.clickToAllLinkMyAccount1(driver, "Reward points");
-		stockSubscriptionsPage = (stockSubscriptionsObject) rewardPointsPage.clickToAllLinkMyAccount1(driver, "Back in stock subscriptions");
-		customerInfoPage = (customerInfoPageObject) rewardPointsPage.clickToAllLinkMyAccount1(driver, "Customer info");
-		ordersPage = (ordersPageObject) customerInfoPage.clickToAllLinkMyAccount1(driver, "Orders");
-		
-	}
-	
-	@Test
-	public void TC_04_Rest_Parameter_Solution_2() {
-		customerInfoPage.clickToAllLinkMyAccount2(driver, "Addresses");
-		addressPage = PageGeneratorManager.getAddresesPage(driver);
-		
-		addressPage.clickToAllLinkMyAccount2(driver, "Orders");
-		ordersPage = PageGeneratorManager.getOrderPage(driver);
-		
-		ordersPage.clickToAllLinkMyAccount2(driver, "My product reviews");
-		myProductPage = PageGeneratorManager.getMyProductReviewsPage(driver);
-		
-		myProductPage.clickToAllLinkMyAccount2(driver, "Customer info");
-		customerInfoPage = PageGeneratorManager.getCustomerInfoPage(driver);
-		
-		customerInfoPage.clickToAllLinkMyAccount2(driver, "Reward points");
-		rewardPointsPage = PageGeneratorManager.getRewardPointsPage(driver);
-		
-		rewardPointsPage.clickToAllLinkMyAccount2(driver, "Back in stock subscriptions");
-		stockSubscriptionsPage = PageGeneratorManager.getStockSubscriptionsPage(driver);
-		
-		rewardPointsPage.clickToAllLinkMyAccount2(driver, "Customer info");
-		customerInfoPage = PageGeneratorManager.getCustomerInfoPage(driver);
-		
-		customerInfoPage.clickToAllLinkMyAccount2(driver, "Orders");
-		ordersPage = PageGeneratorManager.getOrderPage(driver);
-
-	}
 	
 	
 

@@ -13,13 +13,6 @@ public class loginPageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
-	public homePageObject clicktoLoginButton() {
-		waitToElementClickAble(driver, LoginPageUI.LOGIN_BUTTON);
-		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
-		return PageGeneratorManager.getHomePage(driver);
-
-	}
-
 	public void inputToEmailTextBox(String email) {
 		waitToElementVisible(driver, LoginPageUI.EMAIL_TEXTBOX);
 		sendkeyToElement(driver, LoginPageUI.EMAIL_TEXTBOX, email);
@@ -28,6 +21,17 @@ public class loginPageObject extends AbstractPage {
 	public void inputToPasswordTextBox(String pass) {
 		waitToElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
 		sendkeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, pass);
+	}
+
+	public homePageObject clicktoLoginButton() {
+		waitToElementVisible(driver, LoginPageUI.LOGIN_BUTTON);
+		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
+		return PageGeneratorManager.getHomePage(driver);
+	}
+
+	public String getTextErrorMessageWrongEmailPassword() {
+		waitToElementVisible(driver, LoginPageUI.ERROR_MESSAGE_WRONG_MAIL);
+		return getElementText(driver, LoginPageUI.ERROR_MESSAGE_WRONG_MAIL);
 	}
 
 }

@@ -71,7 +71,7 @@ public class Level_03_Register_Login_Page_Object {
 	}
 	@Test
 	public void TC_02_Log_In() {
-		homePage.clickToLoginButton();
+		homePage.clickToLoginLinkHeader();
 		
 		loginPage = new loginPageObject(driver);
 		loginPage.inputToEmailTextBox(email);

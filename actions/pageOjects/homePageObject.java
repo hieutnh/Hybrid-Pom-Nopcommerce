@@ -19,9 +19,9 @@ public class homePageObject extends AbstractPage {
 		return PageGeneratorManager.getRegisterPage(driver);
 	}
 
-	public loginPageObject clickToLoginButton() {
-		waitToElementClickAble(driver, HomePageUI.LOGIN_BUTTON);
-		clickToElement(driver, HomePageUI.LOGIN_BUTTON);
+	public loginPageObject clickToLoginLinkHeader() {
+		waitToElementClickAble(driver, HomePageUI.LOGIN_LINK_HEADER);
+		clickToElement(driver, HomePageUI.LOGIN_LINK_HEADER);
 		return PageGeneratorManager.getLoginPage(driver);
 
 	}

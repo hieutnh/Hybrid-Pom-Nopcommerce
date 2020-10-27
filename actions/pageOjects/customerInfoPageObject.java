@@ -42,15 +42,34 @@ public class customerInfoPageObject extends AbstractPage {
 		return isElementDisplayed(driver, CustomerInfoPageUI.GENDER_RADIO_BUTTON);
 	}
 
-	
+	public void inputFirstNameTextBox(String value) {
+		waitToElementVisible(driver, CustomerInfoPageUI.FIRST_NAME_TEXTBOX);
+		sendkeyToElement(driver, CustomerInfoPageUI.FIRST_NAME_TEXTBOX, value);
+	}
 
+	public void inputLastNameTextBox(String value) {
+		waitToElementVisible(driver, CustomerInfoPageUI.LAST_NAME_TEXTBOX);
+		sendkeyToElement(driver, CustomerInfoPageUI.LAST_NAME_TEXTBOX, value);
+	}
 
+	public void selectDayDropDown(String itemValue) {
+		waitToElementVisible(driver, CustomerInfoPageUI.DAY_DROPDOWN);
+		selectItemInDropdown(driver, CustomerInfoPageUI.DAY_DROPDOWN, itemValue);
+	}
 
-	
-	
+	public void selectMonthDropDown(String itemValue) {
+		waitToElementVisible(driver, CustomerInfoPageUI.MONTH_DROPDOWN);
+		selectItemInDropdown(driver, CustomerInfoPageUI.MONTH_DROPDOWN, itemValue);
+	}
 
-	
+	public void selectYearDropDown(String itemValue) {
+		waitToElementVisible(driver, CustomerInfoPageUI.YEAR_DROPDOWN);
+		selectItemInDropdown(driver, CustomerInfoPageUI.YEAR_DROPDOWN, itemValue);
+	}
 
-	
+	public void SeclectedGenderMaleRadio() {
+		waitToElementVisible(driver, CustomerInfoPageUI.GENDER_RADIO_BUTTON);
+		clickToElement(driver, CustomerInfoPageUI.GENDER_RADIO_BUTTON);
+	}
 
 }

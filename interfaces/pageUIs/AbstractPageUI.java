@@ -9,7 +9,14 @@ public class AbstractPageUI {
 	public static final String REWARD_POINTS_LINK = "//a[text()='Reward points']";
 	public static final String STOCK_SUBCRIPTIONS = "//a[text()='Back in stock subscriptions']";
 	
+	public static final String UPLOAD_FILE_TYPE = "//input[@type='file']";
+	
 	//Dùng 1 locator duy nhất để chuyển page (cách 2)
 	public static final String DYNAMIC_LINK = "//div[@class='listbox']//a[text()='%s']";
 
+	public static final String DYNAMIC_ERROR_MESSAGE_TEXT = "//span[@id='%s']";
+	
+	public static final String DYNAMIC_BUTTON_BY_VALUE = "//input[@value='%s']";
+	
+	public static final String DYNAMIC_CUSTOMERINFO_TEXTBOX = "//div[@class='inputs']//input[@id='%s']";
 }

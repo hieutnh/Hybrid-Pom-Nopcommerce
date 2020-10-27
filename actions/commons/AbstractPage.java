@@ -2,6 +2,7 @@ package commons;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,10 +23,12 @@ import pageOjects.ordersPageObject;
 import pageOjects.rewardPointsPageObject;
 import pageOjects.stockSubscriptionsObject;
 import pageUIs.AbstractPageUI;
+import pageUIs.CustomerInfoPageUI;
+import pageUIs.RegisterPageUI;
 
 public class AbstractPage {
-	
-	//**Hàm cho selenium WebBrowser
+
+	// **Hàm cho selenium WebBrowser
 	public void openPageUrl(WebDriver driver, String url) {
 		driver.get(url);
 
@@ -108,7 +111,7 @@ public class AbstractPage {
 		driver.switchTo().window(parentID);
 	}
 
-	//**hàm cho selenium WebElement
+	// **hàm cho selenium WebElement
 	public WebElement getElement(WebDriver driver, String locator) {
 		return driver.findElement(getByXpath(locator));
 	}
@@ -154,7 +157,7 @@ public class AbstractPage {
 	public void sendkeyToElement(WebDriver driver, String locator, String value, String... values) {
 		element = getElement(driver, getDynamicLocator(locator, values));
 		element.clear();
-		if (driver.toString().toLowerCase().contains("chrome") || driver.toString().toLowerCase().contains("edge")) {
+		if (driver.toString().toLowerCase().contains("chrome") || driver.toString().toLowerCase().contains("edge") || driver.toString().toLowerCase().contains("firefox")) {
 			sleepInMiliSecond(500);
 		}
 		element.sendKeys(value);
@@ -174,6 +177,12 @@ public class AbstractPage {
 
 	public String getSelectedItemInDropdown(WebDriver driver, String locator) {
 		element = getElement(driver, locator);
+		select = new Select(element);
+		return select.getFirstSelectedOption().getText();
+	}
+
+	public String getSelectedItemInDropdown(WebDriver driver, String locator, String... values) {
+		element = getElement(driver, getDynamicLocator(locator, values));
 		select = new Select(element);
 		return select.getFirstSelectedOption().getText();
 	}
@@ -199,6 +208,19 @@ public class AbstractPage {
 				sleepInSecond(1);
 				break;
 			}
+		}
+	}
+
+	// Get all items in a column
+	public void getAllItemInColumn(WebDriver driver, String locatorRow, String locatorColumn, String locatorRandC) {
+		List<WebElement> numerRows = getElements(driver, locatorRow);
+		int rowSize = numerRows.size();
+		System.out.println("row is" + rowSize);
+		List<WebElement> numberColumn = getElements(driver, locatorColumn);
+		int columnSize = numberColumn.size();
+		System.out.println("column is" + columnSize);
+		for (int i = 1; i <= rowSize; i++) {
+			getElement(driver, locatorRandC);
 		}
 	}
 
@@ -228,12 +250,28 @@ public class AbstractPage {
 		return element.getText();
 	}
 
+	public String getElementText(WebDriver driver, String locator, String... values) {
+		element = getElement(driver, getDynamicLocator(locator, values));
+		return element.getText();
+	}
+
 	public int countElementSize(WebDriver driver, String locator) {
 		return getElements(driver, locator).size();
 	}
 
+	public int countElementSize(WebDriver driver, String locator, String... values) {
+		return getElements(driver, getDynamicLocator(locator, values)).size();
+	}
+
 	public void checkToCheckbox(WebDriver driver, String locator) {
 		element = getElement(driver, locator);
+		if (!element.isSelected()) {
+			element.click();
+		}
+	}
+
+	public void checkToCheckbox(WebDriver driver, String locator, String... values) {
+		element = getElement(driver, getDynamicLocator(locator, values));
 		if (!element.isSelected()) {
 			element.click();
 		}
@@ -254,6 +292,44 @@ public class AbstractPage {
 	public boolean isElementDisplayed(WebDriver driver, String locator, String... values) {
 		element = getElement(driver, getDynamicLocator(locator, values));
 		return element.isDisplayed();
+	}
+
+	public void overrideGlobalTimeout(WebDriver driver, long timeInSecond) {
+		driver.manage().timeouts().implicitlyWait(timeInSecond, TimeUnit.SECONDS);
+	}
+
+	public boolean isElementUndisplayed(WebDriver driver, String locator) {
+		overrideGlobalTimeout(driver, GlobalConstants.SHORT_TIMEOUT);
+		elements = getElements(driver, locator);
+		overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
+		if (elements.size() == 0) {
+			System.out.println("Element not in DOM");
+			return true;
+		} else if (elements.size() > 0 && elements.get(0).isDisplayed()) {
+			System.out.println("Element in DOM but not visible/display");
+			return true;
+		} else {
+			System.out.println("Element in DOM and visible/display");
+			return false;
+		}
+
+	}
+
+	public boolean isElementUndisplayed(WebDriver driver, String locator, String... values) {
+		overrideGlobalTimeout(driver, GlobalConstants.SHORT_TIMEOUT);
+		elements = getElements(driver, getDynamicLocator(locator, values));
+		overrideGlobalTimeout(driver, GlobalConstants.LONG_TIMEOUT);
+		if (elements.size() == 0) {
+			System.out.println("Element not in DOM");
+			return true;
+		} else if (elements.size() > 0 && elements.get(0).isDisplayed()) {
+			System.out.println("Element in DOM but not visible/display");
+			return true;
+		} else {
+			System.out.println("Element in DOM and visible/display");
+			return false;
+		}
+
 	}
 
 	public boolean isElementEnabled(WebDriver driver, String locator) {
@@ -352,6 +428,43 @@ public class AbstractPage {
 		jsExecutor = (JavascriptExecutor) driver;
 		element = getElement(driver, locator);
 		jsExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+
+	public String getDirectorySlash(String folderName) {
+		if (isMac() || isUnix() || isSolaris()) {
+			folderName = "/" + folderName + "/";
+		} else {
+			folderName = "\\" + folderName + "\\";
+		}
+		return folderName;
+	}
+
+	public boolean isWindows() {
+		return (osName.toLowerCase().indexOf("win") >= 0);
+	}
+
+	public boolean isMac() {
+		return (osName.toLowerCase().indexOf("mac") >= 0);
+	}
+
+	public boolean isUnix() {
+		return (osName.toLowerCase().indexOf("nix") >= 0 || osName.toLowerCase().indexOf("nux") >= 0 || osName.toLowerCase().indexOf("aix") > 0);
+	}
+
+	public boolean isSolaris() {
+		return (osName.toLowerCase().indexOf("sunos") >= 0);
+	}
+
+	public void uploadMultipleFiles(WebDriver driver, String... fileNames) {
+		String filePath = System.getProperty("user.dir") + getDirectorySlash("UploadFiles");
+
+		String fullFileName = "";
+		for (String file : fileNames) {
+			fullFileName = fullFileName + filePath + file + "\n";
+		}
+		fullFileName = fullFileName.trim();
+		getElement(driver, AbstractPageUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName);
+
 	}
 
 	public void sendkeyToElementByJS(WebDriver driver, String locator, String value) {
@@ -498,18 +611,38 @@ public class AbstractPage {
 
 		}
 	}
-	
+
 	// Rest Parameter hàm dùng 1 locator để mở các link ko giới hạn bao nhiêu page (cách 2)
 	public void clickToAllLinkMyAccount2(WebDriver driver, String linkName) {
 		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
 		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
 	}
+	
+	public String getTextErrorMessageByID(WebDriver driver, String values) {
+		waitToElementVisible(driver, AbstractPageUI.DYNAMIC_ERROR_MESSAGE_TEXT, values);
+		return getElementText(driver, AbstractPageUI.DYNAMIC_ERROR_MESSAGE_TEXT, values);
+	}
 
+	public void clickButtonByValue(WebDriver driver, String values) {
+		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_BUTTON_BY_VALUE, values);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_BUTTON_BY_VALUE, values);
+	}
+	
+	public void InputTextBoxByID(WebDriver driver, String value, String values) {
+		waitToElementVisible(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, value, values);
+		sendkeyToElement(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, value, values);
+	}
+
+	public String getTextCompanyTextBox(WebDriver driver, String values) {
+		waitToElementVisible(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, values);
+		return getElementText(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, values);
+	}
+	
 	private WebDriverWait explicitWait;
 	private JavascriptExecutor jsExecutor;
 	private WebElement element;
 	private Actions action;
 	private List<WebElement> elements;
 	private Select select;
-
+	private String osName = System.getProperty("os.name");
 }

@@ -20,10 +20,10 @@ public class Level_05_Register_Login_Generator_Page extends AbstractTest {
 	Select select;
 	String email, pass, firstname, lastname;
 
-	@Parameters("Browser")
+	@Parameters({ "Browser", "url" })
 	@BeforeClass
-	public void beforeClass(String BrowserName) {
-		driver = getBrowserDriver(BrowserName);
+	public void beforeClass(String BrowserName, String appUrl) {
+		driver = getBrowserDriver(BrowserName, appUrl);
 
 		firstname = "test";
 		lastname = "thoima";

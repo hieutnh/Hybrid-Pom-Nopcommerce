@@ -30,6 +30,8 @@ public class Level_01_Register_Login_Step_By_Step {
 		pass = "123456";
 	}
 
+	
+	
 	@Test
 	public void TC_01_Register() {
 

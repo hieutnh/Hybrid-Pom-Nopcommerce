@@ -18,10 +18,10 @@ public class Level_04_Register_Login_Multiple_Browser extends AbstractTest {
 	Select select;
 	String email, pass, firstname, lastname;
 
-	@Parameters("Browser")
+	@Parameters({ "Browser", "url" })
 	@BeforeClass
-	public void beforeClass(String BrowserName) {
-		driver = getBrowserDriver(BrowserName);
+	public void beforeClass(String BrowserName, String appUrl) {
+		driver = getBrowserDriver(BrowserName, appUrl);
 
 		firstname = "test";
 		lastname = "thoima";
@@ -64,7 +64,7 @@ public class Level_04_Register_Login_Multiple_Browser extends AbstractTest {
 
 	@Test
 	public void TC_02_Log_In() {
-		homePage.clickToLoginButton();
+		homePage.clickToLoginLinkHeader();
 
 		loginPage = new loginPageObject(driver);
 		loginPage.inputToEmailTextBox(email);
