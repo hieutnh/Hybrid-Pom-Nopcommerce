@@ -244,6 +244,11 @@ public class AbstractPage {
 		element = getElement(driver, locator);
 		return element.getAttribute(attributeName);
 	}
+	
+	public String getElementAttribute(WebDriver driver, String locator, String attributeName, String... values) {
+		element = getElement(driver, getDynamicLocator(locator, values));
+		return element.getAttribute(attributeName);
+	}
 
 	public String getElementText(WebDriver driver, String locator) {
 		element = getElement(driver, locator);
@@ -593,8 +598,8 @@ public class AbstractPage {
 
 	// Rest Parameter hàm dùng 1 locator để mở các link chỉ nên dùng < 15 page (cách 1)
 	public AbstractPage clickToAllLinkMyAccount1(WebDriver driver, String linkName) {
-		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
-		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
+		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK_LIST_MY_ACCOUNT, linkName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_LIST_MY_ACCOUNT, linkName);
 		switch (linkName) {
 		case "Addresses":
 			return PageGeneratorManager.getAddresesPage(driver);
@@ -614,8 +619,8 @@ public class AbstractPage {
 
 	// Rest Parameter hàm dùng 1 locator để mở các link ko giới hạn bao nhiêu page (cách 2)
 	public void clickToAllLinkMyAccount2(WebDriver driver, String linkName) {
-		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
-		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, linkName);
+		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LINK_LIST_MY_ACCOUNT, linkName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK_LIST_MY_ACCOUNT, linkName);
 	}
 	
 	public String getTextErrorMessageByID(WebDriver driver, String values) {
@@ -628,14 +633,20 @@ public class AbstractPage {
 		clickToElement(driver, AbstractPageUI.DYNAMIC_BUTTON_BY_VALUE, values);
 	}
 	
-	public void InputTextBoxByID(WebDriver driver, String value, String values) {
-		waitToElementVisible(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, value, values);
-		sendkeyToElement(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, value, values);
+	public void InputTextBoxByID(WebDriver driver, String locatorname, String values) {
+		waitToElementVisible(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, values);
+		sendkeyToElement(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, locatorname, values);
 	}
 
-	public String getTextCompanyTextBox(WebDriver driver, String values) {
+	public String getTextCompanyTextBox(WebDriver driver, String attributeName, String values) {
 		waitToElementVisible(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, values);
-		return getElementText(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, values);
+		return getElementAttribute(driver, AbstractPageUI.DYNAMIC_CUSTOMERINFO_TEXTBOX, attributeName, values);
+	}
+	
+	public void clickLinkHeader(WebDriver driver, String values) {
+		waitToElementClickAble(driver, AbstractPageUI.DYNAMIC_LIST_LINK_HEADER, values);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_LIST_LINK_HEADER, values);
+		
 	}
 	
 	private WebDriverWait explicitWait;

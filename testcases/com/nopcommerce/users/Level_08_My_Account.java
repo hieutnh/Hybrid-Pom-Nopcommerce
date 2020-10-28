@@ -14,6 +14,7 @@ import com.nopcommerce.common.Common_01_Register;
 import commons.AbstractTest;
 import pageOjects.PageGeneratorManager;
 import pageOjects.addressesPageObject;
+import pageOjects.changePasswordPageObject;
 import pageOjects.customerInfoPageObject;
 import pageOjects.homePageObject;
 import pageOjects.loginPageObject;
@@ -39,7 +40,9 @@ public class Level_08_My_Account extends AbstractTest {
 	@Test
 	public void TC_01_Login() {
 		homePage = PageGeneratorManager.getHomePage(driver);
+		
 		loginPage = homePage.clickToLoginLinkHeader();
+		
 		loginPage.inputToEmailTextBox(Common_01_Register.email);
 		loginPage.inputToPasswordTextBox(Common_01_Register.pass);
 		homePage = loginPage.clicktoLoginButton();
@@ -48,7 +51,9 @@ public class Level_08_My_Account extends AbstractTest {
 
 	@Test
 	public void TC_02_My_Account() throws Exception {
-		customerInfoPage = homePage.clickToMyAccountLink();
+		homePage.clickLinkHeader(driver, "My account");
+		customerInfoPage = PageGeneratorManager.getCustomerInfoPage(driver);
+		
 		customerInfoPage.SeclectedGenderMaleRadio();
 		customerInfoPage.inputFirstNameTextBox("Automation");
 		customerInfoPage.inputLastNameTextBox("Fc");
@@ -65,14 +70,13 @@ public class Level_08_My_Account extends AbstractTest {
 		verifyEquals(customerInfoPage.getTextInDaytTextBox(), "1");
 		verifyEquals(customerInfoPage.getTextInMonthtTextBox(), "January");
 		verifyEquals(customerInfoPage.getTextInYearTextBox(), "1999");
-		verifyEquals((customerInfoPage.getTextCompanyTextBox(driver, "Email")), "automationfc.vn@gmail.com");
-//		verifyEquals((customerInfoPage.getTextCompanyTextBox(driver, "Email")), "automationfc.vn@gmail.com");
-//		verifyEquals((customerInfoPage.getTextCompanyTextBox(driver, "Company")), "Automation Fc");
+		verifyEquals((customerInfoPage.getTextCompanyTextBox(driver, "value", "Email")), "automationfc.vn@gmail.com");
+		verifyEquals(customerInfoPage.getTextCompanyTextBox(driver, "value", "Company"), "Automation FC");
 		
 
 	}
 
-	
+	@Test
 	public void TC_03_Addresses() {
 		addressPage = customerInfoPage.clickToAddressLink(driver);
 		addressPage.clickButtonByValue(driver, "Add new");
@@ -88,55 +92,17 @@ public class Level_08_My_Account extends AbstractTest {
 		addressPage.clickButtonByValue(driver, "Save");
 	}
 	
-	public void TC_04_Switch_Page() {
-		addressPage = customerInfoPage.clickToAddressLink(driver);
-		ordersPage = addressPage.clickToOrderLink(driver);
-		myProductPage = ordersPage.clickToMyProductPageLink(driver);
-		customerInfoPage = myProductPage.clickToCustomerInfoPage(driver);
-		rewardPointsPage = customerInfoPage.clickToRewardPoints(driver);
-		stockSubscriptionsPage = rewardPointsPage.clickToStockSubcriptions(driver);
-		customerInfoPage = rewardPointsPage.clickToCustomerInfoPage(driver);
+	@Test
+	public void TC_04_Change_Password() {
+		addressPage.clickToAllLinkMyAccount2(driver, "Change password");
+		changePasswordPage = PageGeneratorManager.getchangePasswordPage(driver);
+		changePasswordPage.InputTextBoxByID(driver, Common_01_Register.pass, "OldPassword");
+		changePasswordPage.InputTextBoxByID(driver, "1234567", "NewPassword");
+		changePasswordPage.InputTextBoxByID(driver, "1234567", "ConfirmNewPassword");
+		changePasswordPage.clickButtonByValue(driver, "Change password");
 
 	}
-
-	public void TC_04_Rest_Parameter_Solution_1() {
-		addressPage = (addressesPageObject) customerInfoPage.clickToAllLinkMyAccount1(driver, "Addresses");
-		ordersPage = (ordersPageObject) addressPage.clickToAllLinkMyAccount1(driver, "Orders");
-		myProductPage = (myProductReviewsPageObject) ordersPage.clickToAllLinkMyAccount1(driver, "My product reviews");
-		customerInfoPage = (customerInfoPageObject) myProductPage.clickToAllLinkMyAccount1(driver, "Customer info");
-		rewardPointsPage = (rewardPointsPageObject) customerInfoPage.clickToAllLinkMyAccount1(driver, "Reward points");
-		stockSubscriptionsPage = (stockSubscriptionsObject) rewardPointsPage.clickToAllLinkMyAccount1(driver, "Back in stock subscriptions");
-		customerInfoPage = (customerInfoPageObject) rewardPointsPage.clickToAllLinkMyAccount1(driver, "Customer info");
-		ordersPage = (ordersPageObject) customerInfoPage.clickToAllLinkMyAccount1(driver, "Orders");
-
-	}
-
-	public void TC_04_Rest_Parameter_Solution_2() {
-		customerInfoPage.clickToAllLinkMyAccount2(driver, "Addresses");
-		addressPage = PageGeneratorManager.getAddresesPage(driver);
-
-		addressPage.clickToAllLinkMyAccount2(driver, "Orders");
-		ordersPage = PageGeneratorManager.getOrderPage(driver);
-
-		ordersPage.clickToAllLinkMyAccount2(driver, "My product reviews");
-		myProductPage = PageGeneratorManager.getMyProductReviewsPage(driver);
-
-		myProductPage.clickToAllLinkMyAccount2(driver, "Customer info");
-		customerInfoPage = PageGeneratorManager.getCustomerInfoPage(driver);
-
-		customerInfoPage.clickToAllLinkMyAccount2(driver, "Reward points");
-		rewardPointsPage = PageGeneratorManager.getRewardPointsPage(driver);
-
-		rewardPointsPage.clickToAllLinkMyAccount2(driver, "Back in stock subscriptions");
-		stockSubscriptionsPage = PageGeneratorManager.getStockSubscriptionsPage(driver);
-
-		rewardPointsPage.clickToAllLinkMyAccount2(driver, "Customer info");
-		customerInfoPage = PageGeneratorManager.getCustomerInfoPage(driver);
-
-		customerInfoPage.clickToAllLinkMyAccount2(driver, "Orders");
-		ordersPage = PageGeneratorManager.getOrderPage(driver);
-
-	}
+	
 
 	@AfterClass
 	public void afterClass() {
@@ -152,5 +118,6 @@ public class Level_08_My_Account extends AbstractTest {
 	myProductReviewsPageObject myProductPage;
 	rewardPointsPageObject rewardPointsPage;
 	stockSubscriptionsObject stockSubscriptionsPage;
+	changePasswordPageObject changePasswordPage;
 
 }

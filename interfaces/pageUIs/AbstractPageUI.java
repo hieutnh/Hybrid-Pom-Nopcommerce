@@ -12,11 +12,13 @@ public class AbstractPageUI {
 	public static final String UPLOAD_FILE_TYPE = "//input[@type='file']";
 	
 	//Dùng 1 locator duy nhất để chuyển page (cách 2)
-	public static final String DYNAMIC_LINK = "//div[@class='listbox']//a[text()='%s']";
+	public static final String DYNAMIC_LINK_LIST_MY_ACCOUNT = "//div[@class='listbox']//a[text()='%s']";
 
 	public static final String DYNAMIC_ERROR_MESSAGE_TEXT = "//span[@id='%s']";
 	
 	public static final String DYNAMIC_BUTTON_BY_VALUE = "//input[@value='%s']";
 	
 	public static final String DYNAMIC_CUSTOMERINFO_TEXTBOX = "//div[@class='inputs']//input[@id='%s']";
+	
+	public static final String DYNAMIC_LIST_LINK_HEADER = "//div[@class='header-links']//a[text()='My account']";
 }

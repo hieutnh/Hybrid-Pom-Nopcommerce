@@ -39,5 +39,9 @@ public class PageGeneratorManager {
 	public static stockSubscriptionsObject getStockSubscriptionsPage(WebDriver driver) {
 		return new stockSubscriptionsObject(driver);
 	}
+	
+	public static changePasswordPageObject getchangePasswordPage(WebDriver driver) {
+		return new changePasswordPageObject(driver);
+	}
 
 }

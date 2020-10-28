@@ -1,0 +1,8 @@
+2020-10-28 14:13:56,009 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,044 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,072 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,122 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,216 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,517 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,547 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 
+2020-10-28 14:13:56,576 INFO  com.nopcommerce.users.Level_08_My_Account -  -------------------------- PASSED -------------------------- 

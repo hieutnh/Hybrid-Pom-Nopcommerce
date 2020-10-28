@@ -28,5 +28,6 @@
 	<classpathentry kind="lib" path="libExtentVersion2/sqlite-jdbc-3.8.11.1.jar"/>
 	<classpathentry kind="lib" path="libLog/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="libLog/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="Libraries/joda-time-2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

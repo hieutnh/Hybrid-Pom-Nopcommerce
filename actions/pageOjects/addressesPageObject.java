@@ -3,6 +3,7 @@ package pageOjects;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPage;
+import pageUIs.AbstractPageUI;
 import pageUIs.AddressesPageUI;
 
 public class addressesPageObject extends AbstractPage {
