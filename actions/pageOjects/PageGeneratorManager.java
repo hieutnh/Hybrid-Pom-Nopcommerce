@@ -43,5 +43,9 @@ public class PageGeneratorManager {
 	public static changePasswordPageObject getchangePasswordPage(WebDriver driver) {
 		return new changePasswordPageObject(driver);
 	}
+	
+	public static searchFooterPageObject getsearchFooterPage(WebDriver driver) {
+		return new searchFooterPageObject(driver);
+	}
 
 }

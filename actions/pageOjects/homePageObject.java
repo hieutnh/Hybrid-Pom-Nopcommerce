@@ -37,4 +37,10 @@ public class homePageObject extends AbstractPage {
 		return PageGeneratorManager.getCustomerInfoPage(driver);
 	}
 
+	public searchFooterPageObject clickSearchFooter() {
+		waitToElementClickAble(driver, HomePageUI.SEARCH_FOOTER_LINK);
+		clickToElement(driver, HomePageUI.SEARCH_FOOTER_LINK);
+		return PageGeneratorManager.getsearchFooterPage(driver);
+	}
+
 }

@@ -11,7 +11,7 @@
 		<classes>
 			<class name="com.nopcommerce.common.Common_01_Register" />
 <!-- 			<class name="com.nopcommerce.users.Level_08_Login" /> -->
-			<class name="com.nopcommerce.users.Level_08_My_Account" />
+			<class name="com.nopcommerce.users.Level_09_Search" />
 		</classes>
 	</test>
 
