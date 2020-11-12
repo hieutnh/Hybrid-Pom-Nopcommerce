@@ -24,7 +24,6 @@ public class Level_05_Register_Login_Generator_Page extends AbstractTest {
 	@BeforeClass
 	public void beforeClass(String BrowserName, String appUrl) {
 		driver = getBrowserDriver(BrowserName, appUrl);
-
 		firstname = "test";
 		lastname = "thoima";
 		email = "testthoima" + getRanDom() + "@gmail.com";
