@@ -4,14 +4,14 @@
 	<listeners>
 		<listener class-name="commons.MethodListener" />
 		<!-- Version 2 -->
-		<listener class-name="reportConfig.ExtentReportListener2"/>
+		<listener class-name="reportConfig.ExtentReportListener2" />
 	</listeners>
 	<test name="Run on FireFox UI">
-		<parameter name="Browser" value="firefox_ui" />
+		<parameter name="Browser" value="chrome_ui" />
 		<classes>
 			<class name="com.nopcommerce.common.Common_01_Register" />
-<!-- 			<class name="com.nopcommerce.users.Level_08_Login" /> -->
-			<class name="com.nopcommerce.users.Level_09_Search" />
+			<!-- <class name="com.nopcommerce.users.Level_08_Login" /> -->
+			<class name="com.nopcommerce.users.Level_08_Login" />
 		</classes>
 	</test>
 
