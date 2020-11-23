@@ -182,3 +182,8 @@
 2020-11-04 18:17:44,206 INFO  com.nopcommerce.users.Level_09_Search -  -------------------------- PASSED -------------------------- 
 2020-11-04 18:17:44,841 INFO  com.nopcommerce.users.Level_09_Search -  -------------------------- PASSED -------------------------- 
 2020-11-04 18:17:46,314 INFO  com.nopcommerce.users.Level_09_Search -  -------------------------- PASSED -------------------------- 
+2020-11-13 17:05:10,757 INFO  com.nopcommerce.users.Level_08_Login -  -------------------------- PASSED -------------------------- 
+2020-11-13 17:05:12,061 INFO  com.nopcommerce.users.Level_08_Login -  -------------------------- PASSED -------------------------- 
+2020-11-13 17:05:14,437 INFO  com.nopcommerce.users.Level_08_Login -  -------------------------- PASSED -------------------------- 
+2020-11-13 17:05:16,869 INFO  com.nopcommerce.users.Level_08_Login -  -------------------------- PASSED -------------------------- 
+2020-11-13 17:05:18,625 INFO  com.nopcommerce.users.Level_08_Login -  -------------------------- PASSED -------------------------- 

@@ -1,3 +1,0 @@
-2020-11-04 18:17:44,206 INFO  com.nopcommerce.users.Level_09_Search -  -------------------------- PASSED -------------------------- 
-2020-11-04 18:17:44,841 INFO  com.nopcommerce.users.Level_09_Search -  -------------------------- PASSED -------------------------- 
-2020-11-04 18:17:46,314 INFO  com.nopcommerce.users.Level_09_Search -  -------------------------- PASSED -------------------------- 
