@@ -1,5 +1,6 @@
 package commons;
 
+import java.io.File;
 import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.testng.Assert;
 import org.testng.Reporter;
+import org.testng.annotations.BeforeSuite;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -179,6 +181,32 @@ public class AbstractTest {
 		return checkEquals(actual, expected);
 	}
 
+	
+	@BeforeSuite
+	private void deleteAllFileInReportNGScreenShot() {
+		System.out.println("-------------------START delete file in folder-------------------");
+		deleteAllFileInFolder();
+		System.out.println("-------------------END delete file in folder-------------------");
+	}
+
+	private void deleteAllFileInFolder() {
+		try {
+			String workingDir = System.getProperty("user.dir");
+			String pathFolderDownload = workingDir + "\\allure-results";
+			File file = new File(pathFolderDownload);
+			File[] listOfFiles = file.listFiles();
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					System.out.println(listOfFiles[i].getName());
+					new File(listOfFiles[i].toString()).delete();
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
 	protected int getRanDom() {
 		Random rand = new Random();
 		return rand.nextInt(999999);
